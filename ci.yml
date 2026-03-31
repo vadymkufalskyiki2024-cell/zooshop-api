@@ -1,26 +1,30 @@
-name: CI Pipeline
+from flask import Flask, jsonify, request
 
-on:
-  push:
-    branches: [ "main" ]
+app = Flask(__name__)
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# Фейкове підключення для CI
+class FakeDB:
+    def cursor(self, dictionary=False):
+        return self
+    def execute(self, query, params=None):
+        pass
+    def fetchall(self):
+        return []
+    def commit(self):
+        pass
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+db = FakeDB()
+cursor = db.cursor(dictionary=True)
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+@app.route('/customers', methods=['GET'])
+def get_customers():
+    cursor.execute("SELECT * FROM customers")
+    results = cursor.fetchall()
+    return jsonify(results)
 
-    - name: Install dependencies
-      run: |
-        pip install flask mysql-connector-python
+# Тільки для локального запуску
+if __name__ == '__main__':
+    app.run(debug=True, port=3000)
 
-    - name: Run test (simple check)
-      run: |
-        python -c "print('App works')"
+# Навмисна помилка для демонстрації CI
+print(abcd)
