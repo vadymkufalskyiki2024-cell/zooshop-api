@@ -3,17 +3,24 @@ version: '3.8'
 services:
   db:
     image: mysql:8
-    container_name: zooshop_db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: zooshop
+      MYSQL_DATABASE: petstoreTrue
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
-      - "3307:3306"
+      - "3306:3306"
 
-  app:
+  web:
     build: .
-    container_name: zooshop_app
-    ports:
-      - "3000:3000"
     depends_on:
       - db
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: petstoreTrue
+    command: python app.py

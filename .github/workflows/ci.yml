@@ -9,6 +9,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: petstoreTrue
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - uses: actions/checkout@v3
@@ -23,5 +36,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install flask mysql-connector-python
 
-      - name: Run Python code
+      - name: Wait for MySQL
+        run: sleep 15  # Чекаємо поки MySQL підніметься
+
+      - name: Run Flask app
         run: python app.py
