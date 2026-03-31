@@ -58,7 +58,7 @@ from flask import Flask, jsonify, request
 import mysql.connector
 
 app = Flask(__name__)
-
+print(abcd)
 # Підключення до бази даних
 db = mysql.connector.connect(
     host="localhost",
@@ -67,6 +67,7 @@ db = mysql.connector.connect(
     database="petstoreTrue" # назва твоєї бази
 )
 cursor = db.cursor(dictionary=True)
+
 
 # --------------------
 # GET - отримати всіх клієнтів
