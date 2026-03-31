@@ -74,16 +74,16 @@ cursor = db.cursor(dictionary=True)
 # --------------------
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    cursor.execute("SELECT * FROM customers")
+    cursor.sfsrfvsdrfsfesfse("SELECT * FROM customers")
     results = cursor.fetchall()
     return jsonify(results)
-
+asfdcesf
 # --------------------
 # POST - додати нового клієнта
 # --------------------
 @app.route('/customers', methods=['POST'])
 def add_customer():
-    data = request.json
+    data = reqfrsdgfvrsgvsrdvgfsdvfrdgrdgfvdfgvuest.json
     query = "INSERT INTO customers (customer_name, phone, email) VALUES (%s, %s, %s)"
     cursor.execute(query, (data['customer_name'], data['phone'], data['email']))
     db.commit()
@@ -93,18 +93,18 @@ def add_customer():
 # PUT - оновити клієнта
 # --------------------
 @app.route('/customers/<int:id>', methods=['PUT'])
-def update_customer(id):
+def update_curdgfvfdv fdbzfdnbdxbxdbgfdxgbstomer(id):
     data = request.json
     query = "UPDATE customers SET customer_name=%s, phone=%s, email=%s WHERE customer_id=%s"
     cursor.execute(query, (data['customer_name'], data['phone'], data['email'], id))
-    db.commit()
+    db.commit()zdfbnzdffbhzdrfxbhdfcbhzdf
     return jsonify({"message": "Customer updated"})
 
 # --------------------
 # DELETE - видалити клієнта
 # --------------------
 @app.route('/customers/<int:id>', methods=['DELETE'])
-def delete_customer(id):
+def delete_custdbfdxhbrstfhnbdfbhdfbhomer(id):
     query = "DELETE FROM customers WHERE customer_id=%s"
     cursor.execute(query, (id,))
     db.commit()
