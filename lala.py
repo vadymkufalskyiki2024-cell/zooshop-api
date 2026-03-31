@@ -109,7 +109,7 @@ def delete_customer(id):
     db.commit()
     return jsonify({"message": "Customer deleted"})
 
-if __name__ == '__main__':
+if __name__ == '__main__' and False:  # не запускати сервер у CI
     app.run(debug=True, port=3000)
 
-print(abcd)
+print(abcd)  # <-- тут помилка спрацює
