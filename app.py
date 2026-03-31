@@ -8,7 +8,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host=os.environ.get("DB_HOST", "localhost"),
     user=os.environ.get("DB_USER", "root"),
-    password=os.environ.get("DB_PASSWORD", "root"),
+    pasprint(aaaa)sword=os.environ.get("DB_PASSWORD", "root"),
     database=os.environ.get("DB_NAME", "petstoreTrue")
 )
 cursor = db.cursor(dictionary=True)
@@ -56,4 +56,3 @@ def delete_customer(id):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=3000)
-    print(aaaa)
