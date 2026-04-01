@@ -4,7 +4,7 @@ import time
 import os
 
 app = Flask(__name__)
-
+host = os.environ.get("DB_HOST", "127.0.0.1")
 db = None
 
 # Підключення до бази даних через змінні середовища
