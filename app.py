@@ -1,16 +1,24 @@
 from flask import Flask, jsonify, request
 import mysql.connector
+import time
 import os
 
 app = Flask(__name__)
 
 # Підключення до бази даних через змінні середовища
-db = mysql.connector.connect(
-    host=os.environ.get("DB_HOST", "localhost"),
-    user=os.environ.get("DB_USER", "root"),
-    password=os.environ.get("DB_PASSWORD", "root"),
-    database=os.environ.get("DB_NAME", "petstoreTrue")
-)
+for i in range(10):
+    try:
+        db = mysql.connector.connect(
+            host=os.environ.get("DB_HOST", "db"),
+            user=os.environ.get("DB_USER", "root"),
+            password=os.environ.get("DB_PASSWORD", "root"),
+            database=os.environ.get("DB_NAME", "petstoretrue")
+        )
+        print("✅ Connected to DB")
+        break
+    except mysql.connector.Error:
+        print("⏳ Waiting for DB...")
+        time.sleep(5)
 cursor = db.cursor(dictionary=True)
 
 # --------------------
