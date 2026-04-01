@@ -5,6 +5,8 @@ import os
 
 app = Flask(__name__)
 
+db = None
+
 # Підключення до бази даних через змінні середовища
 for i in range(10):
     try:
